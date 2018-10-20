@@ -56,15 +56,18 @@ public class AccountService {
 
     public static String print(Account account){
         StringBuilder result = new StringBuilder();
+        result.append(Utils.RC);
         result.append(Utils.RC).append("==========================================================");
         result.append(Utils.RC).append(String.format("Account: %s / %s : ", account.getName(), account.getId()));
         result.append(Utils.RC).append("==========================================================");
-        result.append(Utils.RC).append(String.format("Balance : %s", account.getBalance().getValue()));
+        result.append(Utils.RC).append(String.format("Balance : %s %s", account.getBalance().getValue(), account.getCurrency()));
         result.append(Utils.RC).append("------------------- OPERATIONS HISTORY -------------------");
         if (!account.getOperations().isEmpty()){
             for (Operation operation : account.getOperations()) {
                 result.append(Utils.RC).append(operation);
             }
+        } else {
+            result.append(Utils.RC).append("No operations");
         }
         return result.toString();
     }

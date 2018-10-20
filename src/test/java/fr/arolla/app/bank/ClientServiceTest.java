@@ -1,5 +1,6 @@
 package fr.arolla.app.bank;
 
+import fr.arolla.app.bank.account.Account;
 import fr.arolla.app.bank.client.Client;
 import fr.arolla.app.bank.client.ClientService;
 import org.junit.jupiter.api.AfterEach;
@@ -64,5 +65,50 @@ class ClientServiceTest {
     @DisplayName("Create client test with null last name goes unsuccessful")
     void create_SHOULD_throw_exception_WHEN_last_name_is_null(){
         assertThrows(IllegalArgumentException.class, () -> ClientService.create(firstName, null));
+    }
+
+    @Test
+    @DisplayName("Add account goes successful")
+    void addAccount_SHOULD_return_non_empty_accounts_list_WHEN_add_account() {
+        Client client = ClientService.create(firstName, lastName);
+        Account account = Account.builder().build();
+        ClientService.addAccount(client, account);
+        assertEquals(1, client.getAccounts().size());
+    }
+
+    @Test
+    @DisplayName("Add account goes successful even the account is duplicate")
+    void addAccount_SHOULD_return_1_accounts_list_WHEN_add_same_account_to_client_twice_or_more() {
+        Client client = ClientService.create(firstName, lastName);
+        Account account = Account.builder().build();
+        ClientService.addAccount(client, account);
+        ClientService.addAccount(client, account);
+        ClientService.addAccount(client, account);
+        ClientService.addAccount(client, account);
+        assertEquals(1, client.getAccounts().size());
+    }
+
+    @Test
+    @DisplayName("Add account throws exception when client is null")
+    void addAccount_SHOULD_throw_exception_WHEN_params_are_null_1() {
+        Client client = ClientService.create(firstName, lastName);
+        Account account = Account.builder().build();
+        assertThrows(IllegalArgumentException.class, () -> ClientService.addAccount(null, account));
+    }
+
+    @Test
+    @DisplayName("Add account throws exception when params are null")
+    void addAccount_SHOULD_throw_exception_WHEN_params_are_null_2() {
+        Client client = ClientService.create(firstName, lastName);
+        Account account = Account.builder().build();
+        assertThrows(IllegalArgumentException.class, () -> ClientService.addAccount(null, null));
+    }
+
+    @Test
+    @DisplayName("Add account throws exception when account is null")
+    void addAccount_SHOULD_throw_exception_WHEN_params_are_null_3() {
+        Client client = ClientService.create(firstName, lastName);
+        Account account = Account.builder().build();
+        assertThrows(IllegalArgumentException.class, () -> ClientService.addAccount(client, null));
     }
 }

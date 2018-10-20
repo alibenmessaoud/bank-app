@@ -66,7 +66,7 @@ class OperationServiceTest {
     @Test
     @DisplayName("Print WITHDRAWAL Operation test contains WITHDRAWAL after print")
     void toString_SHOULD_contain_WITHDRAWAL_WHEN_operation_is_withdraw() {
-        Operation depositOperation = OperationService.deposit(amountOfTen);
+        Operation depositOperation = OperationService.withdraw(amountOfTen);
         String printedOperation = depositOperation.toString();
         assertTrue(printedOperation.contains(OperationType.WITHDRAWAL.name()));
     }

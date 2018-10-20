@@ -9,7 +9,7 @@
   <version>1.0.0-SNAPSHOT</version>
 
   <name>app-bank-kata</name>
-  <url>https://github.com/alibenmessaoud/bank-app-kata</url>
+  <url>https://github.com/alibenmessaoud/bank-app</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
