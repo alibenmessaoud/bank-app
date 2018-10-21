@@ -5,6 +5,8 @@ import fr.arolla.app.bank.utils.Amount;
 import fr.arolla.app.bank.operation.Operation;
 import fr.arolla.app.bank.utils.Utils;
 
+import java.util.Optional;
+
 public class AccountService {
 
     private AccountService(){
@@ -50,8 +52,12 @@ public class AccountService {
                 default:
         }
 
+        Optional.ofNullable(account.getOperations()).ifPresent(operations -> {
+            if (!operations.contains(operation)){
+                operations.add(operation);
+            }
+        });
         account.setBalance(newAmount);
-        account.getOperations().add(operation);
     }
 
     public static String print(Account account){
